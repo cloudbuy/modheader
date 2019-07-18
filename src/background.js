@@ -23,7 +23,8 @@ function passFilters_(url, type, filters) {
       switch (filter.type) {
         case 'urls':
           hasUrlFilters = true;
-          if (url.search(filter.urlRegex) == 0) {
+          let urlRegex = (filter.urlRegex.match('^/.*/[gim]*$')) ? RegExp(filter.urlRegex) : filter.urlRegex;
+          if (url.search(urlRegex) == 0) {
             allowUrls = true;
           }
           break;
